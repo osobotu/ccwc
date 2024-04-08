@@ -70,6 +70,12 @@ func main() {
 
 func countWords(f io.Reader) int {
 
+	v, ok := f.(*os.File)
+	if ok {
+		v.Seek(0, 0)
+		f = v
+	}
+
 	scanner := bufio.NewScanner(f)
 	scanner.Split(bufio.ScanWords)
 
@@ -81,6 +87,11 @@ func countWords(f io.Reader) int {
 }
 
 func countLines(f io.Reader) int {
+	v, ok := f.(*os.File)
+	if ok {
+		v.Seek(0, 0)
+		f = v
+	}
 	reader := bufio.NewReader(f)
 	lineCount := 0
 	for {
@@ -94,6 +105,11 @@ func countLines(f io.Reader) int {
 }
 
 func countBytes(f io.Reader) int {
+	v, ok := f.(*os.File)
+	if ok {
+		v.Seek(0, 0)
+		f = v
+	}
 
 	reader := bufio.NewReader(f)
 	byteCount := 0
